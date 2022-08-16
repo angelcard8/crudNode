@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="https://bootswatch.com/4/lux/bootstrap.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a href="/" class="navbar-brand">Crud Prueba Wurth</a>
+    </nav>
+    
+    <div class="container">
+        <div class="row mt-5">
+            <div class="col-md-7">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>TIPO</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (data.categoria) { %>
+                            <% for(var i = 0; i < data.categoria.length; i++) { %>
+                              <tr>
+                                <td><%= data.categoria[i].id%></td>
+                                <td><%= data.categoria[i].nombre%></td>
+                                <td>
+                                  <a href="/updatecategoria/<%= data.categoria[i].id %>" class="btn btn-info">Editar</a>
+                                  <a href="/deletecategoria/<%= data.categoria[i].id %>" class="btn btn-danger">Borrar</a>
+                                </td>
+                              </tr>
+                            <% } %>
+                          <% } %>
+                    </tbody>
+                </table>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>NOMBRE</th>
+                            <th>PRECIO</th>
+                            <th>PESO</th>
+                            <th>TIPO</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (data.productos) { %>
+                            <% for(var i = 0; i < data.productos.length; i++) { %>
+                              <tr>
+                                <td><%= data.productos[i].id %></td>
+                                <td><%= data.productos[i].nombre %></td>
+                                <td><%= data.productos[i].precio %></td>
+                                <td><%= data.productos[i].peso %></td>
+                                <td><%= data.productos[i].tipo %></td>
+                                <td>
+                                  <a href="/update/<%= data.productos[i].id %>" class="btn btn-info">Editar</a>
+                                  <a href="/delete/<%= data.productos[i].id %>" class="btn btn-danger">Borrar</a>
+                                </td>
+                              </tr>
+                            <% } %>
+                          <% } %>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-5">
+                <div class="card">
+                    <div class="card-body">
+                        <h4>Agregar categoria</h4>
+                        <form action="/addcategoria" method="post">
+                            <div class="form-group">
+                                <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+                                <br>
+                                <button type="submit" class="btn btn-primary">Guardar categoria</button>
+                                <br><br><br>
+                            </div>
+                        </form>
+
+                        <form action="/add" method="post">
+                            <h4>Agregar producto</h4>
+
+                            <div class="form-group">
+                                <input type="text" name="nombre" placeholder="Nombre" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="precio" placeholder="Precio" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" name="peso" placeholder="Peso" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <p>Categoria</p>
+                                <select id="inputState" name="tipo" class="form-control">
+
+                                    <% if (data.categoria) { %>
+                                        <% for(var i = 0; i < data.categoria.length; i++) { %>
+                                            
+                                            <option value="<%= data.categoria[i].id %>"><%= data.categoria[i].id%> - <%= data.categoria[i].nombre%></option>
+                                        <% } %>
+                                      <% } %>
+                                </select>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Guardar producto</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
